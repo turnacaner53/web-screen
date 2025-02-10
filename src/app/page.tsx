@@ -56,6 +56,11 @@ export default function Home() {
           >
             {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
           </button>
+          <p
+            className={`${bgColor === '#000' ? 'bg-slate-900 text-gray-300' : 'bg-slate-200 text-black'} rounded-lg border-dashed p-4`}
+          >
+            Double click for <span>{isFullscreen ? 'exit fullscren' : 'fullscreen'} </span>
+          </p>
         </>
       )}
     </div>
