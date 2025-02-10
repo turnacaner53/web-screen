@@ -24,7 +24,7 @@ export default function Home() {
     const handleMouseMove = () => {
       setShowControls(true);
       clearTimeout(timer);
-      timer = setTimeout(() => setShowControls(false), 2000);
+      timer = setTimeout(() => setShowControls(false), 1000);
     };
     window.addEventListener('mousemove', handleMouseMove);
     return () => {
@@ -36,14 +36,18 @@ export default function Home() {
   return (
     <div
       style={{ backgroundColor: bgColor }}
-      className={`flex min-h-screen flex-col items-center justify-end gap-6 pb-24`}
+      className={` ${
+        showControls ? 'cursor-auto' : 'cursor-none'
+      } flex min-h-screen flex-col items-center justify-end gap-6 pb-24`}
       onDoubleClick={() => {
         toggleFullscreen();
       }}
     >
       {showControls && (
         <>
-          <div className='flex flex-row items-center justify-center gap-4 rounded-md border-2 border-dashed border-emerald-500 bg-emerald-700/40 p-4'>
+          <div
+            className={`flex flex-row items-center justify-center gap-4 rounded-md border-2 border-dashed border-emerald-500 bg-emerald-700/40 p-4`}
+          >
             <ColorButton color='#000' onClick={() => setBgColor('#000')} />
             <ColorButton color='#fff' onClick={() => setBgColor('#fff')} />
             <ColorButton color='#f00' onClick={() => setBgColor('#f00')} />
