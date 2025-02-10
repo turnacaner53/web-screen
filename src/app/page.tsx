@@ -37,6 +37,9 @@ export default function Home() {
     <div
       style={{ backgroundColor: bgColor }}
       className={`flex min-h-screen flex-col items-center justify-end gap-6 pb-24`}
+      onDoubleClick={() => {
+        toggleFullscreen();
+      }}
     >
       {showControls && (
         <>
