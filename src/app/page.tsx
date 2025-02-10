@@ -5,14 +5,17 @@ import React, { useEffect, useState } from 'react';
 export default function Home() {
   const [bgColor, setBgColor] = useState('#000');
   const [showControls, setShowControls] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
+      setIsFullscreen(!!document.documentElement.requestFullscreen);
       document.documentElement.requestFullscreen().catch((err) => {
         console.error(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
       });
     } else {
       document.exitFullscreen();
+      setIsFullscreen(false);
     }
   };
 
@@ -48,7 +51,7 @@ export default function Home() {
             className='rounded-md border bg-teal-900 px-4 py-2 text-xl text-teal-300 transition-all duration-200 hover:bg-teal-700 hover:text-teal-200'
             onClick={toggleFullscreen}
           >
-            Fullscreen
+            {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
           </button>
         </>
       )}
