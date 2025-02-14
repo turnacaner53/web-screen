@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 
+import { Expand, Shrink } from 'lucide-react';
+
 export default function Home() {
   const [bgColor, setBgColor] = useState('#000');
   const [showControls, setShowControls] = useState(true);
@@ -38,15 +40,23 @@ export default function Home() {
       style={{ backgroundColor: bgColor }}
       className={` ${
         showControls ? 'cursor-auto' : 'cursor-none'
-      } flex min-h-screen flex-col items-center justify-end gap-6 pb-24`}
+      } flex min-h-screen flex-col items-center justify-between gap-6 pb-24`}
       onDoubleClick={() => {
         toggleFullscreen();
       }}
     >
       {showControls && (
         <>
+          <div className='mt-24 flex-1'>
+            <button
+              className={`${bgColor === '#000' ? 'bg-slate-900 text-gray-300' : 'bg-slate-200 text-black'} flex size-16 items-center justify-center rounded-full border-2  px-4 py-2 text-xl`}
+              onClick={toggleFullscreen}
+            >
+              {isFullscreen ? <Shrink /> : <Expand />}
+            </button>
+          </div>
           <div
-            className={`flex flex-row items-center justify-center gap-4 rounded-md border-2 border-dashed border-emerald-500 bg-emerald-700/40 p-4`}
+            className={`flex flex-row items-center justify-center gap-4 rounded-md border-2 border-violet-500/50 bg-emerald-700/40 px-4 py-2`}
           >
             <ColorButton color='#000' onClick={() => setBgColor('#000')} />
             <ColorButton color='#fff' onClick={() => setBgColor('#fff')} />
@@ -54,16 +64,10 @@ export default function Home() {
             <ColorButton color='#0f0' onClick={() => setBgColor('#0f0')} />
             <ColorButton color='#00f' onClick={() => setBgColor('#00f')} />
           </div>
-          <button
-            className='rounded-md border bg-teal-900 px-4 py-2 text-xl text-teal-300 transition-all duration-200 hover:bg-teal-700 hover:text-teal-200'
-            onClick={toggleFullscreen}
-          >
-            {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
-          </button>
           <p
-            className={`${bgColor === '#000' ? 'bg-slate-900 text-gray-300' : 'bg-slate-200 text-black'} rounded-lg border-dashed p-4`}
+            className={`${bgColor === '#000' ? 'bg-slate-900 text-gray-300' : 'bg-slate-200 text-black'} rounded-lg border-dashed px-4 py-2`}
           >
-            Double click for <span>{isFullscreen ? 'exit fullscren' : 'fullscreen'} </span>
+            Double click to <span>{isFullscreen ? 'exit fullscren' : 'go fullscreen'} </span>
           </p>
         </>
       )}
@@ -75,7 +79,7 @@ const ColorButton = ({ color, onClick }: { color: string; onClick: () => void })
   return (
     <button onClick={onClick}>
       <div
-        className='size-10 rounded-md border border-emerald-500 p-2'
+        className='size-8 rounded-md border border-emerald-500/20 p-2'
         style={{ backgroundColor: color }}
       />
     </button>
