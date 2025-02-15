@@ -7,6 +7,7 @@ import { Expand, Shrink } from 'lucide-react';
 export default function Home() {
   const [bgColor, setBgColor] = useState('#000');
   const [showControls, setShowControls] = useState(true);
+  const [showItems, setShowItems] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   const toggleFullscreen = () => {
@@ -37,19 +38,20 @@ export default function Home() {
 
   return (
     <div
+      onClick={() => setShowItems((showItems) => !showItems)}
       style={{ backgroundColor: bgColor }}
       className={` ${
         showControls ? 'cursor-auto' : 'cursor-none'
-      } flex min-h-screen flex-col items-center justify-between gap-6 pb-24`}
+      } flex min-h-screen flex-col items-center justify-between gap-4 pb-4`}
       onDoubleClick={() => {
         toggleFullscreen();
       }}
     >
-      {showControls && (
+      {showItems && (
         <>
           <div className='mt-24 flex-1'>
             <button
-              className={`${bgColor === '#000' ? 'bg-slate-900 text-gray-300' : 'bg-slate-200 text-black'} flex size-16 items-center justify-center rounded-full border-2  px-4 py-2 text-xl`}
+              className={`${bgColor === '#000' ? 'bg-slate-900 text-gray-300' : 'bg-slate-200 text-black'} flex size-16 items-center justify-center rounded-full border-2 px-2 py-1 text-xl`}
               onClick={toggleFullscreen}
             >
               {isFullscreen ? <Shrink /> : <Expand />}
@@ -65,11 +67,18 @@ export default function Home() {
             <ColorButton color='#00f' onClick={() => setBgColor('#00f')} />
           </div>
           <p
-            className={`${bgColor === '#000' ? 'bg-slate-900 text-gray-300' : 'bg-slate-200 text-black'} rounded-lg border-dashed px-4 py-2`}
+            className={`${bgColor === '#000' ? 'bg-slate-900 text-gray-300' : 'bg-slate-200 text-black'} rounded-lg border-dashed px-2 py-1`}
           >
             Double click to <span>{isFullscreen ? 'exit fullscren' : 'go fullscreen'} </span>
           </p>
         </>
+      )}
+      {!showItems && (
+        <p
+          className={`${showControls ? 'absolute bottom-4' : 'hidden'} ${bgColor === '#000' ? 'bg-slate-950 text-gray-600' : 'bg-slate-200 text-black'} rounded-lg border-dashed px-2 py-1`}
+        >
+          Click to show controls
+        </p>
       )}
     </div>
   );
