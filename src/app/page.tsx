@@ -38,6 +38,12 @@ export default function Home() {
 
   return (
     <div
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'f' || e.key === 'F') {
+          toggleFullscreen();
+        }
+      }}
       onClick={() => setShowItems((showItems) => !showItems)}
       style={{ backgroundColor: bgColor }}
       className={` ${
