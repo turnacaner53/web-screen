@@ -40,7 +40,8 @@ export default function Home() {
     <div
       tabIndex={0}
       onKeyDown={(e) => {
-        if (e.key === 'f' || e.key === 'F') {
+        if (e.key === 'f' || e.key === 'F' || e.key === ' ') {
+          e.preventDefault();
           toggleFullscreen();
         }
       }}
