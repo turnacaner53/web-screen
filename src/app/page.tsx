@@ -7,7 +7,7 @@ import { Expand, Shrink } from 'lucide-react';
 export default function Home() {
   const [bgColor, setBgColor] = useState('#000');
   const [showControls, setShowControls] = useState(true);
-  const [showItems, setShowItems] = useState(true);
+  const [showItems, setShowItems] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   const toggleFullscreen = () => {
